@@ -50,7 +50,7 @@ router.post('/' , async (req,res) => {
     })
     .catch((err)=>{
     	console.log(err);
-        // console.log('Um, some error in app.js ');
+        // console.log('Um, some error In app.js ');
     })
 })
 
