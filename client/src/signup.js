@@ -45,7 +45,7 @@ class Signup extends Component
 		return (
 			<div>
 			<h1>Signup</h1>
-			<form onSubmit={this.submitchange}>
+			<form onSubmit={ this.submitchange }>
 				Roll no : <input type="Number" value={this.state.rollno} onChange={this.rollnoChange}/><br/>
 				Password :<input type="text" value={this.state.password} onChange={this.passwordChange}/><br/>
 				<button type="Submit">Submit</button>
