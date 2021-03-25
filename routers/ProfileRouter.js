@@ -1,6 +1,5 @@
 const express = require('express');
 const mongoose = require("mongoose");
-// const router = express();
 var cors = require('cors');
 const router = express.Router();
 const User = require('../models/user_Schema.js');
@@ -21,14 +20,14 @@ router.get('/', async (req,res) => {
 });
 
 
+
+
 router.post('/' , async (req,res) => {
     // const {oldpassword, password, newpassword } = req.body;
     console.log(req.body);
-    if(!req.session.rollno){
-        res.redirect('/loginpage');
-    }
 
-    // if(password == newpassword){
+    //  Here we are updating password without hashing it.
+
         const user = await User.findOneAndUpdate({rollno:req.body.rollno}, {
             firstname : req.body.firstname,
             lastname : req.body.lastname,
@@ -45,19 +44,14 @@ router.post('/' , async (req,res) => {
         	console.log(err);
             console.log('Um, some error in updateRouter ');
         })
-    // }
-    // else{
-    //     console.log('Password does not match');
-    // }
 })
 
 
-module.exports = router ;
 
-// here we will search by rollno
-// then we will check password
-// if the password is correct
-// then we will compare both new password
-// if they are equal than we will update password
+
+
+
+
+module.exports = router ;
 
 

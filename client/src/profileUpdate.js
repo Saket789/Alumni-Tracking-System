@@ -1,5 +1,7 @@
 import React,{Component} from 'react'
 import axios from 'axios'
+import Navb from './Nav';
+import ReactSession from 'react-client-session';
 
 class ProfileUpdate extends Component
 {
@@ -59,6 +61,7 @@ class ProfileUpdate extends Component
 		
 		await axios.post('http://localhost:8080/profileupdate',this.state)
 		.then((data)=>{
+			ReactSession.get("username");
 			console.log("sent profileupdate page") 
 			this.props.history.push('/homepage')
 		})
@@ -68,6 +71,7 @@ class ProfileUpdate extends Component
 	{
 		return (
 			<div>
+				<Navb />
 			<h1>Profile Update</h1>
 			<form onSubmit={this.submitchange}>
 				rollno : <input type="Number" value={this.state.rollno} onChange={this.rollnoChange}/><br/>

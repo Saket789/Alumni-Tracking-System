@@ -4,31 +4,24 @@ import ProfileUpdate from './profileUpdate';
 import PasswordChange from "./passwordChange";
 import Login from './login.js';
 import Signup from './signup.js';
-import Dashboard from './Dashboard.js';
+import Navb from './Nav.js';
 import About from './about.js';
-import Nav1 from './Nav1.js';
 import {BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'; 
 
 
-class Home extends Component
+class Dashboard extends Component
 {
 	render()
 	{
 		return (
 			<div>
-				<Nav1 />
-            {/* <Link to="/loginpage">
-                <li>Login</li>
-            </Link>
-            <Link to="/signuppage">
-            	<li>Sign Up </li>
-          	</Link> */}
-			<h1> This is home page</h1>
+            <Navb />
+			<h1> This is Dashboard page just updated</h1>
 		</div>
 		)
 	}
 }
-export default Home
+export default Dashboard
 
 
 

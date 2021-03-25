@@ -1,4 +1,14 @@
 const mongoose = require("mongoose");
+const bcrypt = require('bcrypt');
+
+mongoose.connect('mongodb+srv://DbUser:DbUser@cluster0.apwot.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',
+{useNewUrlParser: true, useUnifiedTopology: true})
+.then(()=>{
+    console.log('Database connected');
+})
+.catch((err)=>{
+    console.log(err);
+})
 
 const employeeschema = new mongoose.Schema({
     firstname : {
@@ -50,6 +60,19 @@ const employeeschema = new mongoose.Schema({
 
 // now we need to make connection
 // collection name in singular form and First capital letter
+
+employeeschema.pre( "save", function(next) {
+    if(!this.isModified("password")){
+        return next()
+    }
+    this.password = bcrypt.hashSync(this.password,10);
+    next()
+})
+
+employeeschema.methods.comparePassword = function(plainText, callback){
+    return callback(null, bcrypt.compareSync(plainText,this.password))
+}
+
 const User = mongoose.model('Register',employeeschema);
 
 module.exports = User;

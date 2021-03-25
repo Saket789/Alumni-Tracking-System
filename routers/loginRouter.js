@@ -14,45 +14,35 @@ const flash = require('connect-flash');
 const bcrypt = require('bcrypt');
 
 
-
 router.get('/', async (req,res) => {
     console.log('user....getdata');
-    res.send('/loginpage');
+    // res.send('/loginpage');
 });
 
+    // route for user Login
+    router.post('/' , async (req, res) => {
+        var rollno = req.body.rollno,
+        password = req.body.password;
+  
+        try {
+          var user = await User.findOne({ rollno: rollno }).exec();
+          if(!user) {
+              res.redirect("/loginpage");
+          }
+          user.comparePassword(password, (error, match) => {
+              if(!match) {
+                res.redirect("/loginpage");
+              }
+          });
+          res.send(user);
+      } catch (error) {
+        console.log(error)
+      }
+    });
 
-router.post('/' , async (req,res) => {
-    const { rollno , password } = req.body;
-    // console.log(req.body);
-    const user = await User.findOne({rollno:rollno})        
-    .then( async (data)=>{
-        if(data){
-            // bcrypt.compare(req.body.password,data.password, await function(err, result){
-                //     if(result){
-                    //         console.log('LOgged In');       // problamatic
-                    //         res.send("dsa");
-                    //     }
-                    //     else
-                    //     console.log('Incorrect username or password');
-                    // });
-                if(data.password == req.body.password){
-                    console.log('Welcome'); 
-                    // req.session.rollno = rollno;      
-                    res.send("dsa");
-                }
-                else
-                    console.log('Incorrect username or password');        
-            }
-        else{
-            // console.log(data);
-            console.log('Incorrect username or password  !!!');
-        }
-    })
-    .catch((err)=>{
-    	console.log(err);
-        // console.log('Um, some error In app.js ');
-    })
-})
+
 
 
 module.exports = router ;
+
+

@@ -1,5 +1,6 @@
 import React,{Component} from 'react'
 import axios from 'axios'
+import Navb from './Nav';
 
 class PasswordChange extends Component
 {
@@ -43,6 +44,7 @@ class PasswordChange extends Component
 	{
 		return (
 			<div>
+			<Navb />
 			<h1>Change Password</h1>
 			<form onSubmit={this.submitchange}>
 				Enter Current Password : <input type="text" value={this.state.oldpassword} onChange={this.oldpasswordChange}/><br/><br/>

@@ -13,6 +13,9 @@ const session = require('express-session');
 const flash = require('connect-flash');
 const bcrypt = require('bcrypt');
 
+const sessionOptions = {secret: 'thisisnotagoodsecreat', resave : false, saveUninitialized: false } ;
+router.use(session(sessionOptions));
+
 
 
 router.get('/', async (req,res) => {
@@ -47,18 +50,10 @@ router.post('/' , async (req,res) => {
             console.log('Um, some error in updateRouter ');
         })
     }
-    else{
+    else{ 
         console.log('Password does not match');
     }
 })
 
 
 module.exports = router ;
-
-// here we will search by rollno
-// then we will check password
-// if the password is correct
-// then we will compare both new password
-// if they are equal than we will update password
-
-

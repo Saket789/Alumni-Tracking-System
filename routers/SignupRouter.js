@@ -16,23 +16,32 @@ const bcrypt = require('bcrypt');
 
 router.get('/', (req,res) => {
     console.log("register chala");
+    res.send();
     // res.render('../client/signup');
 })
 
-router.post('/', async (req,res) => {
-    // const { rollno, password } = req.body;
-    // const hash = await bcrypt.hash(password,12);
-    // console.log(password);
-    // console.log(hash);
-    // const user = new User({
-    //     rollno,
-    //     password : hash
-    // })
-    // await user.save();
-    User.create(req.body);
-    console.log("Sign Up done");
-    res.send("\n  Signup page  working  \n");
-})
+
+  
+  // route for user signup
+  
+  router.post('/' , (req, res) => {
+    var user = new User({
+      rollno: req.body.rollno,
+      password:req.body.password,
+    });
+    user.save((err, docs) => {
+      if (err) {
+            console.log("error here");
+            res.redirect("/signuppage");
+      } else {
+            console.log(docs)
+            console.log("no error")
+            res.send();
+      }
+    });
+});
+
+
 
 
 module.exports = router ;
