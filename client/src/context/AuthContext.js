@@ -9,17 +9,16 @@ function AuthContextProvider(props) {
     {
         const loggedRes=await axios.get('http://localhost:8080/users/loggedIn')
         .then((data)=>{
-            if(!data.data.msg)
-            {
+            if(!data.data.msg)           {
                 setLoggedUser(true);
-            }  
+            }
             else
             {
                 setLoggedUser(false);
             }
         })
         .catch(e=>console.log(e))
-        await axios.get('http://localhost:8080/users/loggeduser')
+        await axios.get('http://localhost:8080/users/loggeduser')   // just to retrive user data
         .then(data=>setUser(data.data))
         .catch(e=>console.log(e))
     }

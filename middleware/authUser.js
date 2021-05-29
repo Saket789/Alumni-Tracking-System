@@ -8,4 +8,4 @@ function authUser(req,res,next)
 	req.user=authorized.id;
 	next();
 }
-module.exports=authUser;
+module.exports=authUser;	

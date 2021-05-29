@@ -20,11 +20,11 @@ mongoose.connect('mongodb+srv://DbUser:DbUser@cluster0.apwot.mongodb.net/myFirst
 .catch((err)=>{
 	console.log(err);
 })
-app.use(express.urlencoded({ extended: true }))
+app.use(express.urlencoded({ extended: true }));	   // since router will route url so we used urlencoded true 
 app.use(cookieParser());
 app.use(cors({ origin: true, credentials: true }));
-app.use(express.json({ extended: false }));
-app.use('/users',userRouter);
+app.use(express.json({ extended: false }));				// since router will route url so we used json false
+app.use('/users',userRouter);								
 app.use('/admin',adminRouter);
 app.use('/',postRouter);
 if(process.env.NODE_ENV=='production')

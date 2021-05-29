@@ -24,7 +24,7 @@ router.post('/login',async (req,res)=>{
 	{
 		const token=jwt.sign({id:userfound.roll},process.env.JWT_SECRET);
 		res.cookie("token",token,{
-			httpOnly:true,
+			httpOnly:true,	// Flags thecookie to be accessible only by the web server.
 		}).send();
 	}
 	else
@@ -32,17 +32,20 @@ router.post('/login',async (req,res)=>{
 		res.json({msg:'NO valid username and password'});
 	}
 })
+
 router.get('/allfaqs',async (req,res)=>{
 	await Faq.find({answer:{$exists:true,$ne:""}})
 	.then((data)=>res.json(data))
 	.catch((e)=>console.log(e))
 })
+
 router.post('/faq',async (req,res)=>{
 	const faq=new Faq({question:req.body.question});
 	faq.save()
 	.then(()=>res.json({success:true}))
 	.catch((e)=>console.log(e))
 })
+
 router.get('/logout',(req,res)=>{
 	res.cookie("token","",{httpOnly:true,expires:new Date(0)}).send();
 })
@@ -89,14 +92,12 @@ router.post('/reset',async (req,res)=>{
 	const {mail}=req.body;
 	await User.findOne({mail:mail})
 	.then((user)=>{
-		if(!user)
-		{
+		if(!user){
 			res.json({msg:"User doesn't exist!"})
 			return;
 		}
 		crypto.randomBytes(32,async (err,buffer)=>{
-			if(err)
-			{
+			if(err){
 				console.log(err);
 				return;
 			}
@@ -146,12 +147,13 @@ router.get('/:id',authUser,async (req,res)=>{
 })
 router.put('/:id/edit',authUser,async (req,res)=>{
 	const id=req.user;
-	const user=await User.findOneAndUpdate({roll:parseInt(id)},req.body,{runValidators:true,new:true})
-	.then(()=>res.json({code:0}))
-	.catch((err)=>{
-		res.json({code:1});
-		console.log(err)
-	})
+	const user=await User.findOneAndUpdate({roll:parseInt(id)},
+		req.body,{runValidators:true,new:true})
+		.then(()=>res.json({code:0}))
+		.catch((err)=>{
+			res.json({code:1});
+			console.log(err)
+		})
 })
 router.post('/:id/profileUpdate',authUser,upload.single('file'),async (req,res)=>{
 	const id=req.user;

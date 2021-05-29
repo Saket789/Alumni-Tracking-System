@@ -40,7 +40,6 @@ function Update(props) {
             }
             else
             {
-
                 setFail(true);
             }
             window.scrollTo({
@@ -114,6 +113,8 @@ function Update(props) {
                     Update
                 </Button>
             </Form>
+            <br></br>
+            <br></br>
             
         </div>
     )

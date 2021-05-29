@@ -2,7 +2,6 @@ import axios from 'axios';
 import React,{useState,useEffect,useContext} from 'react'
 import { Badge, Button, Form, FormControl } from 'react-bootstrap';
 import AuthContext from '../context/AuthContext';
-import CommunityHelper from './CommunityHelper';
 
 function SinglePost(props) {
     const id=props.match.params.id;
@@ -74,7 +73,7 @@ function SinglePost(props) {
                            
                            <Badge variant="primary">{comment.roll}</Badge>
                            &emsp;{comment.comment}
-
+                        
                             {/* <h6>{comment.roll} {comment.comment}</h6> */}
 
                            </div>

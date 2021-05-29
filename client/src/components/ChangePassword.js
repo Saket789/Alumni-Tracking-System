@@ -37,7 +37,7 @@ function ChangePassword(props) {
     return (
         <div style={{width:400,height:50,marginLeft:500,marginTop:150}}>
             <Jumbotron>
-                <h1>Change Password</h1>
+                <h1 style={{marginTop : "-30px", marginBottom : "20px"}} >Change Password</h1>
             <Form onSubmit={submithandler}>
                 <Form.Group controlId="formBasicPassword">
                     <Form.Label>Enter Old Password</Form.Label>
@@ -53,7 +53,7 @@ function ChangePassword(props) {
                 </Form.Group>
                 {pop && <h6>Password does not match</h6>}
                 {msg.length>0 && <h5>{msg}</h5>}
-                <Button variant="primary" type="submit">
+                <Button variant="primary" type="submit" style={{marginLeft:85,marginTop:10}}>
                     Change Password
                 </Button>
             </Form>
